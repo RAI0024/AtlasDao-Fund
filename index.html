@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAO Atlas Fund</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Agregamos un archivo externo para los estilos adicionales -->
+    <style>
+        /* Estilos Generales */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Color de fondo general */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+
+header {
+    background-color: #23262F;
+    color: #FFF;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #7E57C2;
+}
+
+/* Main Content */
+
+main {
+    padding: 20px;
+}
+
+.info-section {
+    background-color: #FFF;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px;
+}
+
+.info-section h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+.info-section p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.cta-button {
+    background-color: #7E57C2;
+    color: #FFF;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.cta-button:hover {
+    background-color: #FF8000;
+}
+
+/* Footer */
+
+footer {
+    background-color: #23262F;
+    color: #FFF;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer nav ul {
+    padding: 0;
+}
+
+footer nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+footer nav ul li a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+footer nav ul li a:hover {
+    color: #7E57C2;
+}
+
+/* Tabla de Detalles */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Borde gris claro */
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2; /* Fondo gris claro */
+}
+
+/* Imágenes Transitorias */
+
+.slideshow {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.slideshow img {
+    width: 30%; /* Ajustar tamaño según necesidad */
+    border-radius: 5px; /* Bordes redondeados */
+    opacity: 1; /* Opacidad inicial */
+    transition: opacity 0.5s ease; /* Transición suave */
+}
+
+.slideshow img:hover {
+    opacity: 0.7; /* Opacidad al pasar el mouse */
+}
+#boton {
+    position: fixed; /* Posición fija para que se mantenga en la esquina */
+    top: 10px; /* Distancia desde la parte superior */
+    left: 10px; /* Distancia desde la parte izquierda */
+    background: none; /* Fondo transparente */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    cursor: pointer; /* Cursor de puntero al pasar por encima */
+}
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>DAO Atlas Fund</h1>
+            <img id="boton" href="#"src="https://img.freepik.com/vector-premium/atlas-logo-icono-geometrico-atlas-dios-levantando-globo-negro-logo-icono-diseno-ilustracion_665349-434.jpg" alt="Logotipo"style="width: 80px;">
+            <nav>
+                <ul>
+                    <li><a href="#" @click="showSection('home')">Inicio</a></li>
+                    <li><a href="#" @click="showSection('investments')">Inversiones</a></li>
+                    <li><a href="#" @click="showSection('governance')">Gobernanza</a></li>
+                    <li><a href="#" @click="showSection('members')">Miembros</a></li>
+                    <li><a href="#" @click="showSection('market_data')">Data de mercado</a></li>
+                </ul>
+            </nav>
+        </header>
+        <transition name="fade" mode="out-in">
+            <main>
+                <section v-if="activeSection === 'home'" class="info-section">
+                    <!-- Contenido de la sección de Inicio -->
+                    <p>Estamos ansiosos de recibirlos!</p>
+                    <section>
+                        <h1>Democratizando el acceso a hedge funds</h1>
+                        <p>En Altas Fund, estamos revolucionando el mundo de las inversiones al fusionar la eficacia de los hedge funds con la innovación del mercado cripto. Nuestra plataforma, basada en la tecnología DAO (Organización Autónoma Descentralizada), ofrece a todos la oportunidad de participar en estrategias de inversión avanzadas que antes solo estaban disponibles para unos pocos.</p>
+                        <h2>¿Qué es Altas Fund?</h2>
+                        <p>Altas Fund es más que un fondo de inversión; es una comunidad de inversores empoderada por la tecnología blockchain. Utilizamos la estructura DAO para asegurar una gestión transparente y democrática, donde cada participante tiene voz y voto en las decisiones de inversión.</p>
+                        <h2>¿Por qué elegir Altas Fund?</h2>
+                        <li>Acceso Democratizado: Ahora, cualquier persona puede participar en un hedge fund, sin necesidad de ser un inversor cualificado o disponer de grandes capitales iniciales.</li>
+                        <li>Estrategias Avanzadas: Aplicamos técnicas de inversión sofisticadas y diversificadas en el mercado cripto, diseñadas para maximizar rendimientos y minimizar riesgos.</li>
+                        <li>Transparencia y Seguridad: La tecnología blockchain garantiza que todas las transacciones y decisiones sean transparentes, inmutables y seguras, ofreciendo tranquilidad y confianza a nuestros inversores.</li>
+                        <li>Comunidad Activa: Como parte de nuestra DAO, tendrás la oportunidad de colaborar y decidir en comunidad sobre las estrategias y direcciones del fondo, fomentando un sentido de pertenencia y compromiso.</li><br>
+                        <h2>Nuestra Mision</h2>
+                        <p>Nuestra misión es romper las barreras tradicionales del mundo financiero, permitiendo que todos tengan acceso a las mismas oportunidades de inversión que los grandes jugadores. En Altas Fund, creemos en un futuro financiero inclusivo y accesible para todos.</p>
+                        <h2>Como funciona</h2>
+                        <li>Únete a la DAO: Regístrate en nuestra plataforma y convierte en miembro de nuestra DAO.</li>
+                        <li>Participa en Decisiones: Con tu token de participación, podrás votar y contribuir en las decisiones de inversión del fondo.</li>
+                        <li>Inversiones Diversificadas: Nuestro equipo de expertos gestiona y ejecuta estrategias de inversión diversificadas en el mercado cripto, asegurando un balance entre riesgo y rendimiento.</li>
+                        <li>Transparencia Continua: A través de nuestro panel de control, puedes seguir en tiempo real todas las actividades, rendimientos y decisiones del fondo.</li>
+                        
+                        </section>
+                
+                </section>
+                <section v-else-if="activeSection === 'investments'" class="info-section">
+                    <!-- Contenido de la sección de Inversiones -->
+                    <div class="investment-info">
+                        <h2>Tipos de Inversiones</h2>
+                        <p>La DAO Atlas Fund se dedica a diversas formas de inversión, incluyendo:</p>
+                        <ul>
+                            <li>Inversiones en criptomonedas</li>
+                            <li>Inversiones en acciones</li>
+                            <li>Inversiones en bienes raíces</li>
+                        </ul>
+                        <!-- Imágenes transitorias -->
+                        <div class="slideshow">
+                            <img href="https://www.google.com/imgres?imgurl=https%3A%2F%2Fcontenthub-static.crypto.com%2Fwp_media%2F2022%2F09%2FDAO_OPT_BUG-1-1024x621.png&tbnid=YRbLOnJC_Lcl2M&vet=12ahUKEwj4hqD88cKEAxUYRKQEHVptC2AQMygIegQIARBi..i&imgrefurl=https%3A%2F%2Fcrypto.com%2Funiversity%2Fes%2Fwhat-is-a-dao-decentralised-autonomous-organisation&docid=Gw7RQqm-irHoQM&w=1024&h=621&q=INVERSION%20DAO&client=firefox-b-d&ved=2ahUKEwj4hqD88cKEAxUYRKQEHVptC2AQMygIegQIARBi" alt="Image 1">
+                            <img src="C:\Users\Usuario\Desktop\Carpeta\2.jpg" alt="Image 2">
+                            <img src="C:\Users\Usuario\Desktop\Carpeta\3.jpg" alt="Image 3">
+                        </div>
+                        <!-- Tabla de detalles de inversiones -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Inversión</th>
+                                    <th>Porcentaje</th>
+                                    <th>Blockchain</th>
+                                    <th>Voto en Gobernanza</th>
+                                    <!-- Agregar más encabezados según sea necesario -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se llenará la tabla con datos dinámicos desde Vue.js -->
+                            </tbody>
+                        </table>
+                        <a href="#" class="cta-button">Explorar Inversiones</a>
+                    </div>
+                </section>
+                <section v-else-if="activeSection === 'governance'" class="info-section">
+                    <!-- Contenido de la sección de Gobernanza -->
+                    <div class="governance-info">
+                        <h2>Procesos de Gobierno de DAO Atlas Fund</h2>
+                        <p>La DAO Atlas Fund tiene un proceso de gobernanza transparente y participativo. Los principales pasos incluyen:</p>
+                        <ul>
+                            <li>Proposición de propuestas de inversión</li>
+                            <li>Votación por los miembros</li>
+                            <li>Ejecución de decisiones aprobadas</li>
+                        </ul>
+                        <!-- Tabla de detalles de gobernanza -->
+                        <table>
+                            <!-- Encabezados de la tabla -->
+                            <thead>
+                                <tr>
+                                    <th>Propuesta</th>
+                                    <th>Estatus</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha</th>
+                                    <!-- Agregar más encabezados según sea necesario -->
+                                </tr>
+                            </thead>
+                            <!-- Datos de la tabla -->
+                            <tbody>
+                                <!-- Aquí se llenará la tabla con datos dinámicos desde Vue.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section v-else-if="activeSection === 'members'" class="info-section">
+                    <!-- Contenido de la sección de Miembros -->
+                    <div class="members-info">
+                        <h2>¿Por qué ser Miembro?</h2>
+                        <p>Ser miembro de la DAO Atlas Fund ofrece una serie de beneficios y oportunidades exclusivas que hacen que valga la pena unirse y participar activamente en la comunidad. A continuación, se detallan algunas de las razones por las cuales ser miembro de esta DAO es una decisión inteligente y gratificante: 
+                            <br><b>Acceso a Oportunidades de Inversión Exclusivas:<br></b> 
+                            Los miembros de la DAO Atlas Fund tienen acceso privilegiado a oportunidades de inversión que no están disponibles para el público en general. Esto significa que pueden participar en proyectos emocionantes y lucrativos que podrían generar rendimientos significativos a largo plazo.
+                            <br><b>Participación en Decisiones Democráticas:<br></b> 
+                            Como miembro de la DAO Atlas Fund, tienes voz y voto en las decisiones importantes que afectan a la comunidad y a sus inversiones. Esto significa que puedes contribuir activamente a dar forma al futuro y el rumbo de la DAO, asegurando que tus intereses y opiniones sean tenidos en cuenta.
+                            <br><b>Transparencia:<br></b> 
+                            La DAO Atlas Fund se compromete a operar de manera transparente y abierta. Todos los miembros tienen acceso a información detallada sobre las inversiones, decisiones y operaciones de la DAO, lo que garantiza una total transparencia en todas las actividades.
+                            <br><b>Aprendizaje Continuo:<br></b> 
+                            Ser miembro de la DAO Atlas Fund te brinda la oportunidad de aprender y crecer en el mundo de las inversiones y las finanzas descentralizadas. Puedes participar en eventos educativos, seminarios web y discusiones grupales que te ayudarán a mejorar tus habilidades y conocimientos en el campo de las inversiones.
+                            <br><b>Red de Contactos y Colaboración:<br></b>
+                            Al unirte a la DAO Atlas Fund, te conviertes en parte de una red global de inversores y entusiastas de las criptomonedas. Esto te brinda la oportunidad de establecer contactos, colaborar en proyectos y aprender de personas con ideas afines de todo el mundo.
+                            <br><b>Impacto en la Comunidad:<br></b>
+                        La DAO Atlas Fund se compromete a utilizar una parte de sus ganancias para causas sociales y comunitarias. Como miembro, tienes la oportunidad de contribuir a proyectos benéficos y causas importantes que hacen del mundo un lugar mejor.</p><br>
+                        <h2>Código de Conducta</h2>
+                        <p>El Código de Conducta de la DAO Atlas Fund establece las normas y expectativas de comportamiento para todos los miembros de la comunidad. Este código se basa en tres valores fundamentales: transparencia, respeto y colaboración. A continuación, se presenta un resumen de los principios y directrices que todos los miembros deben seguir:<br><br><b>Transparencia:</b> Todos los miembros deben comprometerse a actuar con transparencia en todas sus interacciones dentro de la comunidad. Esto incluye compartir información de manera abierta y honesta, y ser transparente sobre cualquier conflicto de intereses o motivaciones ocultas.<br><b>Respeto:</b> Se espera que todos los miembros se traten entre sí con respeto y cortesía en todo momento. Esto significa evitar el lenguaje o comportamiento ofensivo, y ser receptivo a las opiniones y perspectivas de los demás, incluso cuando no estés de acuerdo con ellas.<br><b>Colaboración:</b> La colaboración es fundamental para el éxito de la comunidad. Se alienta a todos los miembros a trabajar juntos de manera constructiva, compartir ideas y recursos, y apoyarse mutuamente en la consecución de objetivos comunes.<br></p>
+                        <ul>
+                            <a href="#" class="cta-button">Comienza</a>
+                        </ul>
+                        <!-- Tabla de detalles de miembros -->
+                        <table>
+                            <!-- Encabezados de la tabla -->
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Dirección de Wallet</th>
+                                    <th>Fecha de Ingreso</th>
+                                    <th>Porcentaje ATLAS stake</th>
+                                    <th>Social Influence Ratio</th>
+                                    <!-- Agregar más encabezados según sea necesario -->
+                                </tr>
+                                
+        <script>function dropdownFunction(element) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                let list = element.parentElement.parentElement.getElementsByClassName("dropdown-content")[0];
+                list.classList.add("target");
+                for (i = 0; i < dropdowns.length; i++) {
+                    if (!dropdowns[i].classList.contains("target")) {
+                        dropdowns[i].classList.add("hidden");
+                    }
+                }
+                list.classList.toggle("hidden");
+            }</script>
+                            </thead>
+                            <!-- Datos de la tabla -->
+                            <tbody>
+                                <!-- Aquí se llenará la tabla con datos dinámicos desde Vue.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </transition>
+
+    </div>
+                <!--Aca debajo es donde empieza VUE.JS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                activeSection: 'home',
+                script1Result: '',
+                script2Result: '',
+                script3Result: '',
+                script4Result: '',
+                script5Result: '',
+                script6Result: '',
+                // Agrega más variables para los resultados de los otros scripts
+            },
+            methods: {
+                showSection(section) {
+                    this.activeSection = section;
+                    if (section === 'market_data') {
+                        // Llama a los métodos para ejecutar los scripts cuando se cambia a la sección 'market_data'
+                        this.runScript1();
+                        this.runScript2();
+                        this.runScript3();
+                        this.runScript4();
+                        this.runScript5();
+                        this.runScript6();
+                        // Llama a los métodos para ejecutar los otros scripts
+                    }
+                },
+                runScript1() {
+                    // Código del script 1
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script1Result = "Aquí irían los datos obtenidos del script 1";
+                },
+                runScript2() {
+                    // Código del script 2
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script2Result = "Aquí irían los datos obtenidos del script 2";
+                },
+                runScript3() {
+                    // Código del script 3
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script3Result = "Aquí irían los datos obtenidos del script 3";
+                },
+                runScript4() {
+                    // Código del script 4
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script1Result = "Aquí irían los datos obtenidos del script 4";
+                },
+                runScript5() {
+                    // Código del script 5
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script2Result = "Aquí irían los datos obtenidos del script 5";
+                },
+                runScript6() {
+                    // Código del script 6
+                    // Puedes reemplazar este ejemplo con tu código de Python y ajustarlo para obtener datos
+                    // Por simplicidad, aquí simplemente se muestra un mensaje de ejemplo
+                    this.script3Result = "Aquí irían los datos obtenidos del script 6";
+                }
+                // Agrega más métodos para ejecutar otros scripts
+            }
+        });
+    </script>
+<footer>  
+</footer>
+</body>
+</html>
+    
